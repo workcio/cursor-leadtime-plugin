@@ -1,0 +1,18 @@
+{
+  "name": "leadtime",
+  "displayName": "Leadtime",
+  "version": "0.1.0",
+  "description": "Work with Leadtime data and workflows from Cursor.",
+  "author": {
+    "name": "Leadtime Labs GmbH",
+    "email": "support@leadtime.app"
+  },
+  "homepage": "https://leadtime.app",
+  "repository": "https://github.com/workcio/cursor-leadtime-plugin",
+  "license": "MIT",
+  "keywords": ["leadtime", "tasks", "projects", "erp", "public-api"],
+  "category": "productivity",
+  "tags": ["leadtime", "tasks", "projects", "erp", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": "./mcp.json"
+}

@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "leadtime",
-      "source": "./plugins/leadtime",
+      "source": "./",
       "description": "Work with Leadtime tasks, projects, and workspace data from Cursor."
     }
   ]

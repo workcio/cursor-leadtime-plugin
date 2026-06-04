@@ -14,8 +14,9 @@ await mkdir(outputRoot, { recursive: true });
 
 for (const entry of [
   '.cursor-plugin',
-  'plugins',
+  'skills',
   'scripts',
+  'mcp.json',
   'README.md',
   'LICENSE',
 ]) {

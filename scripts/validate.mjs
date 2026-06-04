@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const repoRoot = fileURLToPath(new URL('../../../../', import.meta.url));
 const projectRoot = join(repoRoot, 'libs/integrations/cursor-leadtime-plugin');
-const pluginRoot = join(projectRoot, 'plugins/leadtime');
+const pluginRoot = projectRoot;
 const errors = [];
 
 function fail(message) {
@@ -41,8 +41,7 @@ if (marketplace) {
     (plugin) => plugin.name === 'leadtime',
   );
   if (!entry) fail('Marketplace must include the leadtime plugin entry.');
-  if (entry?.source !== './plugins/leadtime')
-    fail('Marketplace source must be ./plugins/leadtime.');
+  if (entry?.source !== './') fail('Marketplace source must be ./.');
 }
 
 if (manifest) {
