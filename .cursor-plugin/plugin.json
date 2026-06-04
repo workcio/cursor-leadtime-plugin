@@ -10,6 +10,7 @@
   "homepage": "https://leadtime.app",
   "repository": "https://github.com/workcio/cursor-leadtime-plugin",
   "license": "MIT",
+  "logo": "assets/leadtime.svg",
   "keywords": ["leadtime", "tasks", "projects", "erp", "public-api"],
   "category": "productivity",
   "tags": ["leadtime", "tasks", "projects", "erp", "mcp"],

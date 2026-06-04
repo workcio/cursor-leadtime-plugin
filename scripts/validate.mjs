@@ -55,12 +55,20 @@ if (manifest) {
     fail('Plugin manifest skills path must be ./skills/.');
   if (manifest.mcpServers !== './mcp.json')
     fail('Plugin manifest mcpServers path must be ./mcp.json.');
+  if (manifest.logo !== 'assets/leadtime.svg')
+    fail('Plugin manifest logo path must be assets/leadtime.svg.');
   if (manifest.author?.url)
     fail('Cursor plugin author schema does not allow author.url.');
   for (const field of ['homepage', 'repository']) {
     if (manifest[field] && !isHttpsUrl(manifest[field]))
       fail(`Plugin ${field} must be an https URL.`);
   }
+}
+
+try {
+  await access(join(pluginRoot, 'assets/leadtime.svg'));
+} catch {
+  fail('Plugin logo asset assets/leadtime.svg does not exist.');
 }
 
 if (!manifest?.mcpServers) {
