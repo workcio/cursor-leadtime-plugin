@@ -1,0 +1,17 @@
+{
+  "name": "leadtime",
+  "owner": {
+    "name": "Leadtime Labs GmbH",
+    "email": "support@leadtime.app"
+  },
+  "metadata": {
+    "description": "Leadtime plugin marketplace for Cursor."
+  },
+  "plugins": [
+    {
+      "name": "leadtime",
+      "source": "./plugins/leadtime",
+      "description": "Work with Leadtime tasks, projects, and workspace data from Cursor."
+    }
+  ]
+}

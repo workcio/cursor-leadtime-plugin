@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "leadtime": {
+      "type": "http",
+      "url": "https://leadtime.app/api/mcp",
+      "oauth": true
+    }
+  }
+}
