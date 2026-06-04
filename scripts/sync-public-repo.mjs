@@ -71,6 +71,10 @@ try {
   run('git', ['checkout', '-B', branch], { cwd: workRoot, stdio: 'inherit' });
 }
 
+for (const entry of ['plugins']) {
+  await rm(join(workRoot, entry), { recursive: true, force: true });
+}
+
 for (const entry of [
   '.cursor-plugin',
   'skills',

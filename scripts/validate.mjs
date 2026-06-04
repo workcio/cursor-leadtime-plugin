@@ -80,8 +80,8 @@ if (!manifest?.mcpServers) {
   if (leadtimeMcp?.url !== 'https://leadtime.app/api/mcp') {
     fail('Bundled Leadtime MCP url must be https://leadtime.app/api/mcp.');
   }
-  if (leadtimeMcp?.oauth !== true) {
-    fail('Bundled Leadtime MCP must set oauth to true for Cursor.');
+  if ('oauth' in leadtimeMcp) {
+    fail('Bundled Leadtime MCP must not set oauth; Cursor infers OAuth from the remote MCP server.');
   }
 }
 
