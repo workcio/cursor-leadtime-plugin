@@ -3,7 +3,10 @@ import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = fileURLToPath(new URL('../../../../', import.meta.url));
-const projectRoot = join(repoRoot, 'libs/integrations/cursor-leadtime-plugin');
+const projectRoot = join(
+  repoRoot,
+  'dist/libs/integrations/cursor-leadtime-plugin',
+);
 const pluginRoot = projectRoot;
 const errors = [];
 
@@ -89,7 +92,9 @@ if (!manifest?.mcpServers) {
     fail('Bundled Leadtime MCP url must be https://leadtime.app/api/mcp.');
   }
   if ('oauth' in leadtimeMcp) {
-    fail('Bundled Leadtime MCP must not set oauth; Cursor infers OAuth from the remote MCP server.');
+    fail(
+      'Bundled Leadtime MCP must not set oauth; Cursor infers OAuth from the remote MCP server.',
+    );
   }
 }
 

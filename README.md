@@ -2,6 +2,8 @@
 
 Leadtime Cursor plugin marketplace. It bundles Leadtime skills and the OAuth-enabled Leadtime MCP server for Cursor.
 
+Common Leadtime skills are generated from `libs/integrations/agent-plugin-core` during build. Keep shared behavior there, and put Cursor-only packaging or MCP behavior in this package.
+
 ## Source Of Truth
 
 Edit this package in the Leadtime monorepo:

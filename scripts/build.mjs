@@ -1,6 +1,7 @@
 import { cp, mkdir, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { generateAgentPluginAssets } from '../../agent-plugin-core/scripts/generate-plugin-assets.mjs';
 
 const repoRoot = fileURLToPath(new URL('../../../../', import.meta.url));
 const projectRoot = join(repoRoot, 'libs/integrations/cursor-leadtime-plugin');
@@ -15,7 +16,6 @@ await mkdir(outputRoot, { recursive: true });
 for (const entry of [
   '.cursor-plugin',
   'assets',
-  'skills',
   'scripts',
   'mcp.json',
   'README.md',
@@ -26,6 +26,12 @@ for (const entry of [
     force: true,
   });
 }
+
+await generateAgentPluginAssets({
+  agent: 'cursor',
+  outputRoot,
+  skillsPath: 'skills',
+});
 
 await writeFile(
   join(outputRoot, '.generated-from'),
