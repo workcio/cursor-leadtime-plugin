@@ -45,6 +45,8 @@ if (marketplace) {
   );
   if (!entry) fail('Marketplace must include the leadtime plugin entry.');
   if (entry?.source !== './') fail('Marketplace source must be ./.');
+  if (entry?.logo !== 'assets/leadtime.png')
+    fail('Marketplace plugin logo path must be assets/leadtime.png.');
 }
 
 if (manifest) {
@@ -58,8 +60,8 @@ if (manifest) {
     fail('Plugin manifest skills path must be ./skills/.');
   if (manifest.mcpServers !== './mcp.json')
     fail('Plugin manifest mcpServers path must be ./mcp.json.');
-  if (manifest.logo !== 'assets/leadtime.svg')
-    fail('Plugin manifest logo path must be assets/leadtime.svg.');
+  if (manifest.logo !== 'assets/leadtime.png')
+    fail('Plugin manifest logo path must be assets/leadtime.png.');
   if (manifest.author?.url)
     fail('Cursor plugin author schema does not allow author.url.');
   for (const field of ['homepage', 'repository']) {
@@ -71,7 +73,23 @@ if (manifest) {
 try {
   await access(join(pluginRoot, 'assets/leadtime.svg'));
 } catch {
-  fail('Plugin logo asset assets/leadtime.svg does not exist.');
+  fail('Plugin source mark assets/leadtime.svg does not exist.');
+}
+
+const logoPath = join(pluginRoot, 'assets/leadtime.png');
+try {
+  const logoBytes = await readFile(logoPath);
+  if (
+    logoBytes.length < 8 ||
+    logoBytes[0] !== 0x89 ||
+    logoBytes[1] !== 0x50 ||
+    logoBytes[2] !== 0x4e ||
+    logoBytes[3] !== 0x47
+  ) {
+    fail('Plugin logo asset assets/leadtime.png must be a PNG file.');
+  }
+} catch {
+  fail('Plugin logo asset assets/leadtime.png does not exist.');
 }
 
 if (!manifest?.mcpServers) {
