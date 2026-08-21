@@ -41,9 +41,9 @@ so this public repository is synced only when this integration package is affect
 In Cursor:
 
 1. Open Cursor Settings.
-2. Go to Plugins.
-3. Paste `https://github.com/workcio/cursor-leadtime-plugin` into `Search or Paste Link`.
-4. Press Enter, open Leadtime, and click Add to Cursor.
+2. Go to Plugins and click + Add Marketplace.
+3. Choose Import from GitHub and paste `https://github.com/workcio/cursor-leadtime-plugin`.
+4. Add Leadtime, then authorize Leadtime when Cursor opens the browser.
 
 Install the Leadtime plugin and authorize Leadtime when Cursor opens the browser for MCP OAuth.
 
