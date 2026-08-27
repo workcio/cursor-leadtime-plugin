@@ -1,6 +1,8 @@
 # Leadtime Cursor Plugin
 
-Leadtime Cursor plugin marketplace. It bundles Leadtime skills and the OAuth-enabled Leadtime MCP server for Cursor.
+Leadtime Cursor plugin marketplace and Agent Plugins 1.0 package. It bundles Leadtime skills and the OAuth-enabled Leadtime MCP server for Cursor.
+
+The repository root follows Agent Plugins 1.0 with `plugin.json`, `mcp.json`, and `skills/`. Cursor-specific marketplace metadata stays in `.cursor-plugin/`, and `mcp.cursor.json` keeps Cursor's native MCP configuration.
 
 The marketplace logo is `assets/leadtime.png`. Cursor resolves that relative path to a GitHub raw URL. Do not point the manifest at the SVG; Cursor plugin tiles often ignore SVG logos.
 

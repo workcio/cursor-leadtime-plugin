@@ -1,6 +1,7 @@
 import { access, readdir, readFile, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { validateAgentPluginManifest } from '../../agent-plugin-core/scripts/validate-agent-plugin.mjs';
 
 const repoRoot = fileURLToPath(new URL('../../../../', import.meta.url));
 const projectRoot = join(
@@ -35,6 +36,17 @@ const marketplace = await readJson(
   join(projectRoot, '.cursor-plugin/marketplace.json'),
 );
 const manifest = await readJson(join(pluginRoot, '.cursor-plugin/plugin.json'));
+let portableManifest = null;
+let portableMcp = null;
+
+try {
+  const portable = await validateAgentPluginManifest(pluginRoot);
+  portableManifest = portable.pluginManifest;
+  portableMcp = portable.mcpManifest;
+  errors.push(...portable.errors);
+} catch (error) {
+  fail(`Agent Plugins 1.0 validation failed: ${error.message}`);
+}
 
 if (marketplace) {
   if (marketplace.name !== 'leadtime')
@@ -58,8 +70,8 @@ if (manifest) {
     fail('Plugin manifest version must be strict semver, e.g. 0.1.0.');
   if (manifest.skills !== './skills/')
     fail('Plugin manifest skills path must be ./skills/.');
-  if (manifest.mcpServers !== './mcp.json')
-    fail('Plugin manifest mcpServers path must be ./mcp.json.');
+  if (manifest.mcpServers !== './mcp.cursor.json')
+    fail('Plugin manifest mcpServers path must be ./mcp.cursor.json.');
   if (manifest.logo !== 'assets/leadtime.png')
     fail('Plugin manifest logo path must be assets/leadtime.png.');
   if (manifest.author?.url)
@@ -68,6 +80,25 @@ if (manifest) {
     if (manifest[field] && !isHttpsUrl(manifest[field]))
       fail(`Plugin ${field} must be an https URL.`);
   }
+}
+
+if (portableManifest) {
+  if (portableManifest.name !== 'leadtime')
+    fail('Portable plugin manifest name must be "leadtime".');
+  if (!isStrictSemver(portableManifest.version))
+    fail('Portable plugin manifest version must be strict semver.');
+  if (portableManifest.version !== manifest?.version)
+    fail('Portable and Cursor-native plugin versions must match.');
+  if (portableManifest.repository !== manifest?.repository)
+    fail('Portable and Cursor-native repositories must match.');
+}
+
+const portableLeadtimeMcp = portableMcp?.mcpServers?.leadtime;
+if (portableLeadtimeMcp?.type !== 'streamable-http') {
+  fail('Portable Leadtime MCP type must be streamable-http.');
+}
+if (portableLeadtimeMcp?.url !== 'https://leadtime.app/api/mcp') {
+  fail('Portable Leadtime MCP url must be https://leadtime.app/api/mcp.');
 }
 
 try {
@@ -105,7 +136,7 @@ if (!manifest?.mcpServers) {
   const mcpConfig = await readJson(mcpPath);
   const leadtimeMcp = mcpConfig?.mcpServers?.leadtime;
   if (leadtimeMcp?.type !== 'http')
-    fail('Bundled Leadtime MCP type must be http.');
+    fail('Cursor-native Leadtime MCP type must be http.');
   if (leadtimeMcp?.url !== 'https://leadtime.app/api/mcp') {
     fail('Bundled Leadtime MCP url must be https://leadtime.app/api/mcp.');
   }
@@ -159,4 +190,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('Leadtime Cursor plugin validation passed.');
+console.log('Leadtime Cursor Agent Plugin and marketplace validation passed.');

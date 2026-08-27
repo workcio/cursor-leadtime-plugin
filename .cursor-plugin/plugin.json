@@ -1,7 +1,7 @@
 {
   "name": "leadtime",
   "displayName": "Leadtime",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Work with Leadtime data and workflows from Cursor.",
   "author": {
     "name": "Leadtime Labs GmbH",
@@ -15,5 +15,5 @@
   "category": "productivity",
   "tags": ["leadtime", "tasks", "projects", "erp", "mcp"],
   "skills": "./skills/",
-  "mcpServers": "./mcp.json"
+  "mcpServers": "./mcp.cursor.json"
 }

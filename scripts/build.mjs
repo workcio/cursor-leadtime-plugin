@@ -17,7 +17,9 @@ for (const entry of [
   '.cursor-plugin',
   'assets',
   'scripts',
+  'plugin.json',
   'mcp.json',
+  'mcp.cursor.json',
   'README.md',
   'LICENSE',
 ]) {
@@ -38,9 +40,8 @@ await writeFile(
   [
     'Generated from Leadtime monorepo.',
     `Source project: libs/integrations/cursor-leadtime-plugin`,
-    `Generated at: ${new Date().toISOString()}`,
     '',
   ].join('\n'),
 );
 
-console.log(`Built Cursor plugin marketplace at ${outputRoot}`);
+console.log(`Built Cursor Agent Plugin and marketplace at ${outputRoot}`);

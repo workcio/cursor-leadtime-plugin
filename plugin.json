@@ -1,0 +1,15 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "leadtime",
+  "version": "0.2.0",
+  "description": "Work with Leadtime tasks, projects, and workspace data.",
+  "author": {
+    "name": "Leadtime Labs GmbH",
+    "email": "support@leadtime.app",
+    "url": "https://leadtime.app"
+  },
+  "homepage": "https://leadtime.app",
+  "repository": "https://github.com/workcio/cursor-leadtime-plugin",
+  "license": "MIT",
+  "keywords": ["leadtime", "tasks", "projects", "erp", "mcp"]
+}
